@@ -42,27 +42,20 @@ module.exports.delete = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
-  const data = { text } = req.body
+  const data = { text, title, author, image } = req.body
 
   Post.create({
     ...data,
-    image: req.file?.path,
-    author: req.user.id
   })
     .then(post => res.status(201).json(post))
     .catch(next)
 }
 
-module.exports.edit = (req, res, next) => {
-  const data = { text } = req.body;
+module.exports.edit = async (req, res, next) => {
+  const data = { text, title, author } = req.body;
 
-  if (req.file) {
-    data.image = req.file?.path
-  }
-
-  Object.assign(req.post, data);
-
-  post.save()
+  req.post.set(data);
+  req.post.save()
     .then(post => res.json(post))
     .catch(next)
 }

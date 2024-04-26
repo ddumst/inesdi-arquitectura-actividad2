@@ -2,9 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
+  title: {
+    type: String,
+    required: 'title is required',
+    minLength: 5,
+  },
   text: {
     type: String,
     required: 'text is required',
+    minLength: 5,
     maxlength: 300
   },
   author: {
