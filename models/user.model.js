@@ -8,10 +8,11 @@ const userSchema = new Schema({
         type: String,
         required: 'name is required'
     },
-    username: {
+    email: {
         type: String,
-        required: 'username is required',
-        unique: true
+        required: 'email is required',
+        unique: true,
+        match: [/^\S+@\S+\.\S+$/, 'the email is invalid']
     },
     bio: {
         type: String,
@@ -21,6 +22,10 @@ const userSchema = new Schema({
         type: String,
         required: 'avatar is required',
         default: 'https://i2.wp.com/www.cssscript.com/wp-content/uploads/2020/12/Customizable-SVG-Avatar-Generator-In-JavaScript-Avataaars.js.png?fit=438%2C408&ssl=1'
+    },
+    active: {
+        type: Boolean,
+        default: false
     },
     password: {
         type: String,

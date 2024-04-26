@@ -7,6 +7,7 @@ const sec = require('../middlewares/secure.middleware')
 
 router.post('/users', upload.single('avatar'), users.create)
 router.get('/users/:id', sec.auth, users.get)
+router.get('/users/activate/:id', users.activate)
 router.patch('/users/:id', sec.auth, sec.self, upload.single('avatar'), users.update)
 router.delete('/users/:id', sec.auth, sec.self, users.delete)
 

@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 const passport = require('passport');
 
-// require('./config/passport.config');
+require('./config/passport.config');
 require('./config/db.config');
 const cors = require('./config/cors.config');
 const session = require('./config/session.config');

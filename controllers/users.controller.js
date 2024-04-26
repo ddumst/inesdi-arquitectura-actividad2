@@ -3,11 +3,13 @@ const User = require('../models/user.model');
 const passport = require('passport');
 
 module.exports.create = (req, res, next) => {
-  const data = { name, username, bio, private, password } = req.body
+  const { name, bio, password, email } = req.body
 
   User.create({
-    ...data,
-    avatar: req.file?.path
+    name,
+    bio,
+    password,
+    email,
   })
     .then(user => res.status(201).json(user))
     .catch(next)
@@ -85,4 +87,12 @@ module.exports.doLoginWithGoogle = (req, res, next) => {
   })
   
   passportController(req, res, next);
+}
+
+module.exports.activate = (req, res, next) => {
+  const { id } = req.params;
+
+  User.findByIdAndUpdate(id, { active: true }, { new: true })
+    .then(user => res.status(200).json(user))
+    .catch(next)
 }
